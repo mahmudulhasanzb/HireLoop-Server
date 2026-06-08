@@ -3,7 +3,7 @@ const app = express();
 const cors = require('cors');
 const dotenv = require('dotenv')
 dotenv.config()
-const port = process.env.PORT || 5000;
+const port = process.env.PORT || 8000;
 const { MongoClient, ServerApiVersion } = require('mongodb');
 app.use(cors())
 app.use(express.json())
@@ -49,7 +49,7 @@ async function run() {
       res.send(result)
     })
 
-    app.post('/jobs', async (req, res) => {
+    app.post('/api/jobs', async (req, res) => {
       const job = req.body;
       const result = await jobsCollection.insertOne(job);
       res.send(result);
