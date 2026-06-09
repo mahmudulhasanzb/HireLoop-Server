@@ -55,6 +55,22 @@ async function run() {
       res.send(result);
     })
 
+    // company related apis
+    app.get('/api/my/companies', async (req, res) => {
+      const recruiterId = req.query.recruiterId;
+      if (!recruiterId || recruiterId === 'undefined') {
+        return res.send(null);
+      }
+      const result = await compnayCollection.findOne({ recruiterId })
+      res.send(result)
+    })
+
+    app.post('/api/companies', async(req, res) => {
+      const company = req.body
+      const result = await compnayCollection.insertOne(company)
+      res.send(result)
+    })
+
     await client.db('admin').command({ ping: 1 });
     console.log(
       'Pinged your deployment. You successfully connected to MongoDB!',
